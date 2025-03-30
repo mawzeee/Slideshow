@@ -72,7 +72,10 @@ class Slideshow {
             },
             onComplete: () => {
                 this.DOM.slides[previous].classList.remove('slide--current');
-                this.isAnimating = false;
+                // Delay interaction for 2 seconds before allowing next navigation
+                setTimeout(() => {
+                    this.isAnimating = false;
+                }, 400);
             }
         })
         .addLabel('start', 0)
