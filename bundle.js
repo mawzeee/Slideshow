@@ -129,7 +129,7 @@ class Slideshow {
                     elements.number
                 ], {
                     y: '0em',
-                    delay: 0.5,
+                    delay: 1.5,
                     duration: 1.2,
                     ease: 'quart.out'
                 });
@@ -140,7 +140,7 @@ class Slideshow {
                     elements.para
                 ], {
                     y: '0em',
-                    delay: 0.7,
+                    delay: 1.7,
                     duration: 1,
                     ease: 'quart.out'
                 });
@@ -148,7 +148,7 @@ class Slideshow {
                 // Animate tags opacity
                 gsap.to(elements.tags, {
                     opacity: 1,
-                    delay: 0.5,
+                    delay: 1.5,
                     duration: 1.2,
                     ease: 'power1.out'
                 });
@@ -175,3 +175,4 @@ Observer.create({
 
 // Preload all images
 preloadImages('.slide__img').then(() => document.body.classList.remove('loading'));
+
