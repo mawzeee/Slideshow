@@ -124,7 +124,7 @@ class Slideshow {
                     ...elements.number
                 ], {
                     y: '0em',
-                    delay: 0.8,
+                    delay: 0.5,
                     duration: 1.2,
                     ease: 'quart.out'
                 });
@@ -135,14 +135,14 @@ class Slideshow {
                     ...elements.para
                 ], {
                     y: '0em',
-                    delay: 1,
+                    delay: .7,
                     duration: 1,
                     ease: 'quart.out'
                 });
 
                 // Animate tags
                 gsap.to(elements.tags, {
-                    opacity: 1,
+                    opacity: .5,
                     delay: .8,
                     duration: 1.2,
                     ease: 'power1.out'
