@@ -75,7 +75,7 @@ class Slideshow {
                         link: upcomingSlide.querySelectorAll('.work-link'),
                         link2: upcomingSlide.querySelectorAll('.link-2.white'),
                         number: upcomingSlide.querySelectorAll('.work-number-serif'),
-                        para: upcomingSlide.querySelectorAll('.Par-sm.white.center'),
+                        para: upcomingSlide.querySelectorAll('.par-sm.white.center'),
                         tags: upcomingSlide.querySelectorAll('.tag.white')
                     };
 
