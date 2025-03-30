@@ -100,7 +100,7 @@ class Slideshow {
                 const elements = {
                     heading: upcomingSlide.querySelectorAll('.work-heading'),
                     link: upcomingSlide.querySelectorAll('.work-link'),
-                    link2: upcomingSlide.querySelectorAll('.link2.white'),
+                    link2: upcomingSlide.querySelectorAll('.link-2.white'),
                     number: upcomingSlide.querySelectorAll('.work-number-serif'),
                     para: upcomingSlide.querySelectorAll('.par-sm.white.center'),
                     tags: upcomingSlide.querySelectorAll('.tag.white')
