@@ -100,9 +100,9 @@ class Slideshow {
                 const elements = {
                     heading: upcomingSlide.querySelectorAll('.work-heading'),
                     link: upcomingSlide.querySelectorAll('.work-link'),
-                    link2: upcomingSlide.querySelectorAll('.Link.white'),
+                    link2: upcomingSlide.querySelectorAll('.link2.white'),
                     number: upcomingSlide.querySelectorAll('.work-number-serif'),
-                    para: upcomingSlide.querySelectorAll('.Par-sm.white.center'),
+                    para: upcomingSlide.querySelectorAll('.par-sm.white.center'),
                     tags: upcomingSlide.querySelectorAll('.tag.white')
                 };
 
@@ -124,7 +124,7 @@ class Slideshow {
                     ...elements.number
                 ], {
                     y: '0em',
-                    delay: 0.5,
+                    delay: 0.8,
                     duration: 1.2,
                     ease: 'quart.out'
                 });
@@ -135,7 +135,7 @@ class Slideshow {
                     ...elements.para
                 ], {
                     y: '0em',
-                    delay: 0.7,
+                    delay: 1,
                     duration: 1,
                     ease: 'quart.out'
                 });
@@ -143,7 +143,7 @@ class Slideshow {
                 // Animate tags
                 gsap.to(elements.tags, {
                     opacity: 1,
-                    delay: 0.5,
+                    delay: .8,
                     duration: 1.2,
                     ease: 'power1.out'
                 });
