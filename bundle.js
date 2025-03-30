@@ -105,9 +105,9 @@ class Slideshow {
                 const elements = {
                     heading: upcomingSlide.querySelector('.work-heading'),
                     link: upcomingSlide.querySelector('.work-link'),
-                    link2: upcomingSlide.querySelector('.Link.white'),
+                    link2: upcomingSlide.querySelector('.link-2.white'),
                     number: upcomingSlide.querySelector('.work-number-serif'),
-                    para: upcomingSlide.querySelector('.Par-sm.white.center'),
+                    para: upcomingSlide.querySelector('.par-sm.white.center'),
                     tags: upcomingSlide.querySelectorAll('.tag.white')
                 };
     
@@ -175,4 +175,3 @@ Observer.create({
 
 // Preload all images
 preloadImages('.slide__img').then(() => document.body.classList.remove('loading'));
-
