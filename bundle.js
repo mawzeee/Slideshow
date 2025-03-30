@@ -26,6 +26,7 @@ class Slideshow {
     current = 0;
     slidesTotal = 0;
     isAnimating = false;
+    _textElements = null;
 
     constructor(DOM_el) {
         this.DOM.el = DOM_el;
@@ -65,13 +66,40 @@ class Slideshow {
                     ease: 'power2.inOut'
                 },
                 onStart: () => {
+                    // Add current slide class
                     upcomingSlide.classList.add('slide--current');
+
+                    // Get all text elements on the upcoming slide
+                    const elements = {
+                        heading: upcomingSlide.querySelectorAll('.work-heading'),
+                        link: upcomingSlide.querySelectorAll('.work-link'),
+                        link2: upcomingSlide.querySelectorAll('.link-2.white'),
+                        number: upcomingSlide.querySelectorAll('.work-number-serif'),
+                        para: upcomingSlide.querySelectorAll('.Par-sm.white.center'),
+                        tags: upcomingSlide.querySelectorAll('.tag.white')
+                    };
+
+                    // Set initial states before animation
+                    gsap.set([
+                        ...elements.heading,
+                        ...elements.link,
+                        ...elements.link2
+                    ], { y: '1em' });
+
+                    gsap.set(elements.number, { y: '1.2em' });
+                    gsap.set(elements.para, { y: '2.5em' });
+                    gsap.set(elements.tags, { opacity: 0 });
+
+                    // Store elements for animation after transition
+                    this._textElements = elements;
                 },
                 onComplete: () => {
                     currentSlide.classList.remove('slide--current');
+
+                    // Re-enable interaction after delay
                     setTimeout(() => {
                         this.isAnimating = false;
-                    }, 1500); // Adjust delay here
+                    }, 1500); // You can tweak this delay if needed
                 }
             })
             .addLabel('start', 0)
@@ -96,26 +124,7 @@ class Slideshow {
                 scale: 1
             }, 'start+=0.1')
             .add(() => {
-                // TEXT REVEAL ANIMATION
-                const elements = {
-                    heading: upcomingSlide.querySelectorAll('.work-heading'),
-                    link: upcomingSlide.querySelectorAll('.work-link'),
-                    link2: upcomingSlide.querySelectorAll('.link-2.white'),
-                    number: upcomingSlide.querySelectorAll('.work-number-serif'),
-                    para: upcomingSlide.querySelectorAll('.par-sm.white.center'),
-                    tags: upcomingSlide.querySelectorAll('.tag.white')
-                };
-
-                // Set initial states
-                gsap.set([
-                    ...elements.heading,
-                    ...elements.link,
-                    ...elements.link2
-                ], { y: '1em' });
-
-                gsap.set(elements.number, { y: '1.2em' });
-                gsap.set(elements.para, { y: '2.5em' });
-                gsap.set(elements.tags, { opacity: 0 });
+                const elements = this._textElements;
 
                 // Animate group 1
                 gsap.to([
@@ -135,15 +144,15 @@ class Slideshow {
                     ...elements.para
                 ], {
                     y: '0em',
-                    delay: .7,
+                    delay: 0.7,
                     duration: 1,
                     ease: 'quart.out'
                 });
 
                 // Animate tags
                 gsap.to(elements.tags, {
-                    opacity: .5,
-                    delay: .8,
+                    opacity: 1,
+                    delay: 0.5,
                     duration: 1.2,
                     ease: 'power1.out'
                 });
@@ -158,7 +167,7 @@ const slideshow = new Slideshow(slides);
 document.querySelector('.slides-nav__item--prev').addEventListener('click', () => slideshow.prev());
 document.querySelector('.slides-nav__item--next').addEventListener('click', () => slideshow.next());
 
-// Enable scroll/gesture navigation
+// Enable scroll and gesture navigation
 Observer.create({
     type: 'wheel,touch,pointer',
     onDown: () => slideshow.prev(),
@@ -167,5 +176,5 @@ Observer.create({
     tolerance: 10
 });
 
-// Preload images before starting
+// Preload images
 preloadImages('.slide__img').then(() => document.body.classList.remove('loading'));
