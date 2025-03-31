@@ -84,7 +84,7 @@ class Slideshow {
                         ...elements.heading,
                         ...elements.link,
                         ...elements.link2
-                    ], { y: '1em' });
+                    ], { y: '1.1em' });
 
                     gsap.set(elements.number, { y: '1.2em' });
                     gsap.set(elements.para, { y: '2.5em' });
