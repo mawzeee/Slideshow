@@ -117,12 +117,12 @@ class Slideshow {
             }, {
                 scale: 1,
                 yPercent: 0
-            }, 'start+=0.1')
+            }, 'start+=0')
             .fromTo(upcomingInner, {
                 scale: 1.1
             }, {
                 scale: 1
-            }, 'start+=0.1')
+            }, 'start+=0')
             .add(() => {
                 const elements = this._textElements;
 
