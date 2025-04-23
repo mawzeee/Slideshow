@@ -134,7 +134,7 @@ class Slideshow {
                 ], {
                     y: '0em',
                     delay: .6,
-                    duration: 1.2,
+                    duration: 1.4,
                     ease: 'quart.out'
                 });
 
@@ -145,7 +145,7 @@ class Slideshow {
                 ], {
                     y: '0em',
                     delay: .8,
-                    duration: 1,
+                    duration: 1.2,
                     ease: 'quart.out'
                 });
 
@@ -153,7 +153,7 @@ class Slideshow {
                 gsap.to(elements.tags, {
                     opacity: 1,
                     delay: .6,
-                    duration: 1.2,
+                    duration: 1.4,
                     ease: 'power1.out'
                 });
             }, 'start+=0.6');
