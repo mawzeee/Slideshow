@@ -132,7 +132,7 @@ class Slideshow {
                     delay: .6,
                     duration: 1.4,
                     ease: 'quart.out'
-                });
+                }, 0.2);
 
                 gsap.to([
                     ...elements.heading,
@@ -142,14 +142,14 @@ class Slideshow {
                     delay: .8,
                     duration: 1.2,
                     ease: 'quart.out'
-                });
+                }, 0.4);
 
                 gsap.to(elements.tags, {
                     opacity: 1,
                     delay: .6,
                     duration: 1.4,
                     ease: 'power1.out'
-                });
+                }, 0.2);
             }, 'start+=0.6');
     }
 }
@@ -174,7 +174,8 @@ Observer.create({
 preloadImages('.slide__img').then(() => {
     document.body.classList.remove('loading');
 
-    gsap.delayedCall(2.5, () => {
+    // Apply delayed initial animation
+    gsap.delayedCall(1.8, () => {
         const firstSlide = slideshow.DOM.slides[0];
         const elements = {
             heading: firstSlide.querySelectorAll('.work-heading'),
@@ -186,6 +187,7 @@ preloadImages('.slide__img').then(() => {
             tags: firstSlide.querySelectorAll('.tag.white')
         };
 
+        // Set initial state (opacity 1)
         gsap.set([
             ...elements.heading,
             ...elements.link,
@@ -197,14 +199,14 @@ preloadImages('.slide__img').then(() => {
 
         const tl = gsap.timeline();
 
-        // Animate navbar
+        // Animate navbar (with delay)
         tl.to('.nav-work', {
             opacity: 1,
             duration: 1,
             ease: 'power2.out'
         }, 0);
 
-        // Animate text group 1
+        // Animate text group 1 (links and number)
         tl.to([
             ...elements.link,
             ...elements.link2,
@@ -216,7 +218,7 @@ preloadImages('.slide__img').then(() => {
             ease: 'quart.out'
         }, 0.2);
 
-        // Animate text group 2
+        // Animate text group 2 (heading and paragraph)
         tl.to([
             ...elements.heading,
             ...elements.para
