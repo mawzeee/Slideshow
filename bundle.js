@@ -81,10 +81,10 @@ class Slideshow {
                         ...elements.heading,
                         ...elements.link,
                         ...elements.link2
-                    ], { y: '1.1em' });
+                    ], { y: '1.1em', opacity: 1 });
 
-                    gsap.set(elements.number, { y: '1.2em' });
-                    gsap.set(elements.para, { y: '2.5em' });
+                    gsap.set(elements.number, { y: '1.2em', opacity: 1 });
+                    gsap.set(elements.para, { y: '2.5em', opacity: 1 });
                     gsap.set(elements.tags, { opacity: 0 });
 
                     this._textElements = elements;
@@ -183,29 +183,26 @@ preloadImages('.slide__img').then(() => {
             tags: firstSlide.querySelectorAll('.tag.white')
         };
 
-        // Set initial states
+        // Set initial states (already hidden via CSS to avoid flicker)
         gsap.set([
             ...elements.heading,
             ...elements.link,
-            ...elements.link2
-        ], { y: '1.1em' });
-
-        gsap.set(elements.number, { y: '1.2em' });
-        gsap.set(elements.para, { y: '2.5em' });
-        gsap.set(elements.tags, { opacity: 0 });
-
-        // Set navbar initial opacity
-        gsap.set('.navbar', { opacity: 0 });
+            ...elements.link2,
+            elements.number,
+            elements.para
+        ], { opacity: 1 });
 
         // Animate navbar and text
         const tl = gsap.timeline();
 
-        tl.to('.navbar', {
+        // Animate navbar (correct class: .nav-work)
+        tl.to('.nav-work', {
             opacity: 1,
             duration: 1,
             ease: 'power2.out'
         }, 0);
 
+        // Animate text elements
         tl.to([
             ...elements.link,
             ...elements.link2,
