@@ -72,6 +72,7 @@ class Slideshow {
                         heading: upcomingSlide.querySelectorAll('.work-heading'),
                         link: upcomingSlide.querySelectorAll('.work-link'),
                         link2: upcomingSlide.querySelectorAll('.link-2.white'),
+                        linkFooter: upcomingSlide.querySelectorAll('.link-footer.white'),
                         number: upcomingSlide.querySelectorAll('.work-number-serif'),
                         para: upcomingSlide.querySelectorAll('.par-sm.white.center'),
                         tags: upcomingSlide.querySelectorAll('.tag.white')
@@ -80,7 +81,8 @@ class Slideshow {
                     gsap.set([
                         ...elements.heading,
                         ...elements.link,
-                        ...elements.link2
+                        ...elements.link2,
+                        ...elements.linkFooter
                     ], { y: '1.1em', opacity: 1 });
 
                     gsap.set(elements.number, { y: '1.2em', opacity: 1 });
@@ -123,6 +125,7 @@ class Slideshow {
                 gsap.to([
                     ...elements.link,
                     ...elements.link2,
+                    ...elements.linkFooter,
                     ...elements.number
                 ], {
                     y: '0em',
@@ -171,41 +174,41 @@ Observer.create({
 preloadImages('.slide__img').then(() => {
     document.body.classList.remove('loading');
 
-    // Animate first slide and navbar after 2.5s delay
     gsap.delayedCall(2.5, () => {
         const firstSlide = slideshow.DOM.slides[0];
         const elements = {
             heading: firstSlide.querySelectorAll('.work-heading'),
             link: firstSlide.querySelectorAll('.work-link'),
             link2: firstSlide.querySelectorAll('.link-2.white'),
+            linkFooter: firstSlide.querySelectorAll('.link-footer.white'),
             number: firstSlide.querySelectorAll('.work-number-serif'),
             para: firstSlide.querySelectorAll('.par-sm.white.center'),
             tags: firstSlide.querySelectorAll('.tag.white')
         };
 
-        // Set initial states (already hidden via CSS to avoid flicker)
         gsap.set([
             ...elements.heading,
             ...elements.link,
             ...elements.link2,
+            ...elements.linkFooter,
             elements.number,
             elements.para
         ], { opacity: 1 });
 
-        // Animate navbar and text
         const tl = gsap.timeline();
 
-        // Animate navbar (correct class: .nav-work)
+        // Animate navbar
         tl.to('.nav-work', {
             opacity: 1,
             duration: 1,
             ease: 'power2.out'
         }, 0);
 
-        // Animate text elements
+        // Animate text group 1
         tl.to([
             ...elements.link,
             ...elements.link2,
+            ...elements.linkFooter,
             ...elements.number
         ], {
             y: '0em',
@@ -213,6 +216,7 @@ preloadImages('.slide__img').then(() => {
             ease: 'quart.out'
         }, 0.2);
 
+        // Animate text group 2
         tl.to([
             ...elements.heading,
             ...elements.para
@@ -222,6 +226,7 @@ preloadImages('.slide__img').then(() => {
             ease: 'quart.out'
         }, 0.4);
 
+        // Animate tags
         tl.to(elements.tags, {
             opacity: 1,
             duration: 1.4,
