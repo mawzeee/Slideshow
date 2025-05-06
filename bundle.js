@@ -66,10 +66,8 @@ class Slideshow {
                     ease: 'power2.inOut'
                 },
                 onStart: () => {
-                    // Add current slide class
                     upcomingSlide.classList.add('slide--current');
 
-                    // Get all text elements on the upcoming slide
                     const elements = {
                         heading: upcomingSlide.querySelectorAll('.work-heading'),
                         link: upcomingSlide.querySelectorAll('.work-link'),
@@ -79,7 +77,6 @@ class Slideshow {
                         tags: upcomingSlide.querySelectorAll('.tag.white')
                     };
 
-                    // Set initial states before animation
                     gsap.set([
                         ...elements.heading,
                         ...elements.link,
@@ -90,16 +87,13 @@ class Slideshow {
                     gsap.set(elements.para, { y: '2.5em' });
                     gsap.set(elements.tags, { opacity: 0 });
 
-                    // Store elements for animation after transition
                     this._textElements = elements;
                 },
                 onComplete: () => {
                     currentSlide.classList.remove('slide--current');
-
-                    // Re-enable interaction after delay
                     setTimeout(() => {
                         this.isAnimating = false;
-                    }, 1500); // You can tweak this delay if needed
+                    }, 1500);
                 }
             })
             .addLabel('start', 0)
@@ -126,7 +120,6 @@ class Slideshow {
             .add(() => {
                 const elements = this._textElements;
 
-                // Animate group 1
                 gsap.to([
                     ...elements.link,
                     ...elements.link2,
@@ -138,7 +131,6 @@ class Slideshow {
                     ease: 'quart.out'
                 });
 
-                // Animate group 2
                 gsap.to([
                     ...elements.heading,
                     ...elements.para
@@ -149,7 +141,6 @@ class Slideshow {
                     ease: 'quart.out'
                 });
 
-                // Animate tags
                 gsap.to(elements.tags, {
                     opacity: 1,
                     delay: .6,
@@ -176,5 +167,68 @@ Observer.create({
     tolerance: 10
 });
 
-// Preload images
-preloadImages('.slide__img').then(() => document.body.classList.remove('loading'));
+// Preload images and run initial animation
+preloadImages('.slide__img').then(() => {
+    document.body.classList.remove('loading');
+
+    // Animate first slide and navbar after 2.5s delay
+    gsap.delayedCall(2.5, () => {
+        const firstSlide = slideshow.DOM.slides[0];
+        const elements = {
+            heading: firstSlide.querySelectorAll('.work-heading'),
+            link: firstSlide.querySelectorAll('.work-link'),
+            link2: firstSlide.querySelectorAll('.link-2.white'),
+            number: firstSlide.querySelectorAll('.work-number-serif'),
+            para: firstSlide.querySelectorAll('.par-sm.white.center'),
+            tags: firstSlide.querySelectorAll('.tag.white')
+        };
+
+        // Set initial states
+        gsap.set([
+            ...elements.heading,
+            ...elements.link,
+            ...elements.link2
+        ], { y: '1.1em' });
+
+        gsap.set(elements.number, { y: '1.2em' });
+        gsap.set(elements.para, { y: '2.5em' });
+        gsap.set(elements.tags, { opacity: 0 });
+
+        // Set navbar initial opacity
+        gsap.set('.navbar', { opacity: 0 });
+
+        // Animate navbar and text
+        const tl = gsap.timeline();
+
+        tl.to('.navbar', {
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.out'
+        }, 0);
+
+        tl.to([
+            ...elements.link,
+            ...elements.link2,
+            ...elements.number
+        ], {
+            y: '0em',
+            duration: 1.4,
+            ease: 'quart.out'
+        }, 0.2);
+
+        tl.to([
+            ...elements.heading,
+            ...elements.para
+        ], {
+            y: '0em',
+            duration: 1.2,
+            ease: 'quart.out'
+        }, 0.4);
+
+        tl.to(elements.tags, {
+            opacity: 1,
+            duration: 1.4,
+            ease: 'power1.out'
+        }, 0.2);
+    });
+});
