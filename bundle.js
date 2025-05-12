@@ -174,7 +174,7 @@ Observer.create({
 preloadImages('.slide__img').then(() => {
     document.body.classList.remove('loading');
 
-    gsap.delayedCall(2.5, () => {
+    gsap.delayedCall(1.5, () => {
         const firstSlide = slideshow.DOM.slides[0];
         const elements = {
             heading: firstSlide.querySelectorAll('.work-heading'),
