@@ -183,8 +183,14 @@ preloadImages('.slide__img').then(() => {
             linkFooter: firstSlide.querySelectorAll('.link-footer.white'),
             number: firstSlide.querySelectorAll('.work-number-serif'),
             para: firstSlide.querySelectorAll('.par-sm.white.center'),
-            tags: firstSlide.querySelectorAll('.tag.white')
+            tags: firstSlide.querySelectorAll('.tag.white'),
+            linkAbs: firstSlide.querySelectorAll('.work-link.abs')
         };
+
+         // 👇 Set specific class .work-link.abs to y 1.5em
+          gsap.set(elements.linkAbs, {
+            y: '1.5em'
+          });
 
         gsap.set([
             ...elements.heading,
